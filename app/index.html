@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover Studio — GTA-style cover art maker</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">VC</span>
+    <div>
+      <strong>Vice Cover Studio</strong>
+      <span class="brand-sub">Turn a photo into GTA-style cover art</span>
+    </div>
+  </div>
+  <div class="export-row" role="group" aria-label="Export size">
+    <button type="button" class="size-btn" data-export="1080x1080">1080 &times; 1080</button>
+    <button type="button" class="size-btn" data-export="1080x1350">1080 &times; 1350</button>
+    <button type="button" class="size-btn is-active" data-export="1920x1080">1920 &times; 1080</button>
+    <button type="button" id="exportBtn" class="export-btn">Export PNG</button>
+  </div>
+</header>
+
+<main class="studio">
+  <aside class="panel" aria-label="Cover controls">
+    <section class="group">
+      <h2>1 · Photos</h2>
+      <p class="hint">Drop 1–4 photos anywhere, or pick files. One photo can fill every panel; each panel crops on its own.</p>
+      <label class="file-btn">Add photos
+        <input id="fileInput" type="file" accept="image/*" multiple hidden>
+      </label>
+      <div class="thumb-row" id="thumbRow" aria-label="Loaded photos"></div>
+      <div class="sample-row">
+        <span>Try a sample:</span>
+        <button type="button" class="sample-btn" data-sample="boulevard">Boulevard</button>
+        <button type="button" class="sample-btn" data-sample="pier">Pier</button>
+      </div>
+      <p class="hint small">Photos stay on your machine — nothing is uploaded.</p>
+    </section>
+
+    <section class="group">
+      <h2>2 · Layout</h2>
+      <div class="choice-row" id="layoutRow" role="group" aria-label="Poster layout"></div>
+      <label class="field">Panel photo
+        <select id="panelPhoto"></select>
+      </label>
+      <div class="field-row">
+        <label class="field grow">Zoom
+          <input id="zoomRange" type="range" min="100" max="300" value="100">
+        </label>
+        <button type="button" id="autoFillBtn" class="mini-btn">Auto-fill</button>
+      </div>
+      <p class="hint small">Drag on the preview to pan the selected panel. Click a panel to select it.</p>
+    </section>
+
+    <section class="group">
+      <h2>3 · Caption</h2>
+      <label class="field">Title
+        <input id="titleInput" type="text" maxlength="28" value="VICE CITY">
+      </label>
+      <label class="field">Subtitle
+        <input id="subInput" type="text" maxlength="48" value="One last job under the neon sun">
+      </label>
+      <div class="choice-row" id="inkRow" role="group" aria-label="Caption colour"></div>
+      <label class="field">Caption position
+        <select id="captionPos">
+          <option value="band">Bottom band</option>
+          <option value="top">Top of cover</option>
+          <option value="over">Over the hero panel</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="group">
+      <h2>4 · Colour grade</h2>
+      <div class="choice-row" id="gradeRow" role="group" aria-label="Colour grade"></div>
+      <label class="field">Grade strength
+        <input id="gradeRange" type="range" min="0" max="100" value="70">
+      </label>
+      <label class="check"><input id="sunCheck" type="checkbox" checked> Sunset sun + palm silhouettes</label>
+      <label class="check"><input id="grainCheck" type="checkbox" checked> Film grain</label>
+      <label class="check"><input id="vignetteCheck" type="checkbox" checked> Vignette</label>
+    </section>
+
+    <p id="status" class="status" role="status">Load a photo to begin.</p>
+  </aside>
+
+  <section class="stage" aria-label="Cover preview">
+    <div class="canvas-wrap" id="canvasWrap">
+      <canvas id="stage" width="1920" height="1080" aria-label="Cover preview"></canvas>
+    </div>
+    <p class="stage-hint">Three steps: photo &rarr; layout &amp; caption &rarr; Export PNG.</p>
+  </section>
+</main>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
